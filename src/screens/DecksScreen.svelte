@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { getDecks } from "@/storage/storageOperations";
+  import ResponsiveGrid from "@/componenets/ResponsiveGrid.svelte";
+  import { addDeck, getDecks } from "@/storage/storageOperations";
+  import DeckCard from "./DeckCard.svelte";
 
   const decks = getDecks();
 </script>
@@ -8,8 +10,13 @@
   <span class="navbar-start">mohsen's app</span>
 </header>
 
-{#each $decks as deck}
-  <article class="card">
-    <p class="card-title">{deck.name}</p>
-  </article>
-{/each}
+<ResponsiveGrid>
+  {#each $decks as deck}
+    <DeckCard {deck} />
+  {/each}
+  <button
+    class="btn btn-primary"
+    on:click={() => addDeck({ name: "this is a card", color: "magenta" })}
+    >add card</button
+  >
+</ResponsiveGrid>

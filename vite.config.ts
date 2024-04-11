@@ -10,6 +10,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src/"),
       "@types.ts": path.resolve(__dirname, "./src/types.ts"),
       "@assets": path.resolve(__dirname, "./src/assets"),
+      "@components": path.resolve(__dirname, "./src/components"),
       "@storageOperations.ts": path.resolve(
         __dirname,
         "./src/storage/storageOperations.ts"
