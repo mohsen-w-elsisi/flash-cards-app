@@ -16,7 +16,7 @@
 
     height: 100%;
 
-    & > * {
+    & > *:not(dialog) {
       width: var(--item-width);
       height: var(--item-height);
 

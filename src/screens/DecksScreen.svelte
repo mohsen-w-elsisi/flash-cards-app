@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ResponsiveGrid from "@/componenets/ResponsiveGrid.svelte";
+  import ResponsiveGrid from "@/ui/ResponsiveGrid.svelte";
   import { addDeck, getDecks } from "@/storage/storageOperations";
   import DeckCard from "./DeckCard.svelte";
 
