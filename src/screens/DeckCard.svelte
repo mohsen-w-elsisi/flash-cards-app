@@ -5,7 +5,8 @@
 
   export let deck: Deck;
 
-  const deckColorClass = deckColorMap[deck.color].class;
+  let deckColorClass: string;
+  $: deckColorClass = deckColorMap[deck.color].class;
 
   let showEditDialog: () => void;
 </script>

@@ -10,16 +10,6 @@ function makeID() {
   return `${Math.random()}`;
 }
 
-function getDeckIndex(deckID: string) {
-  const $decks = get(decks);
-
-  for (let i = 0; i < $decks.length; i++) {
-    if ($decks[i].ID == deckID) {
-      return i;
-    }
-  }
-}
-
 export function getDecks() {
   return readonly(decks);
 }
@@ -39,3 +29,10 @@ export function removeDeck(deckID: string) {
   decks.update(($decks) => $decks.filter((deck) => deck.ID != deckID));
 }
 
+export function editDeck(deckID: string, newDeck: UnsavedDeck) {
+  decks.update((oldDecks) =>
+    oldDecks.map(
+      (deck) => (deck.ID != deckID ? deck : { ...deck, ...newDeck })
+    )
+  );
+}
