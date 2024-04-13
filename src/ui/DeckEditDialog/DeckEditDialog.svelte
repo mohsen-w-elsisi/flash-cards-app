@@ -5,13 +5,19 @@
   import { editDeck } from "@/storage/storageOperations";
 
   export let deck: Deck;
+  export let onSave: () => any = () => undefined;
+  export let onCancel: () => any = () => undefined;
 
   export function showEditDialog() {
+    newName = deck.name;
+    newColor = deck.color;
+
     dialog.showModal();
   }
 
   function saveDeckChanges() {
     editDeck(deck.ID, { name: newName, color: newColor });
+    onSave();
   }
 
   let dialog: HTMLDialogElement;
@@ -31,7 +37,7 @@
 
       <span class="modal-action justify-normal">
         <form method="dialog" class="flex gap-3 flex-1">
-          <button class="btn flex-1">cancel</button>
+          <button class="btn flex-1" on:click={onCancel}>cancel</button>
           <button class="btn btn-primary flex-1" on:click={saveDeckChanges}>
             save
           </button>

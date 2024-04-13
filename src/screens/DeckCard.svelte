@@ -1,5 +1,5 @@
 <script lang="ts">
-  import DeckEditDIalog from "@/ui/DeckEditDialog/index.svelte";
+  import DeckEditDIalog from "@/ui/DeckEditDialog/DeckEditDialog.svelte";
   import type { Deck } from "@/types";
   import { deckColorMap } from "@/ui/colors";
 

@@ -1,7 +1,8 @@
 <script lang="ts">
   import ResponsiveGrid from "@/ui/ResponsiveGrid.svelte";
-  import { addDeck, getDecks } from "@/storage/storageOperations";
+  import { getDecks } from "@/storage/storageOperations";
   import DeckCard from "./DeckCard.svelte";
+  import NewDeckButton from "./NewDeckButton.svelte";
 
   const decks = getDecks();
 </script>
@@ -14,9 +15,5 @@
   {#each $decks as deck}
     <DeckCard {deck} />
   {/each}
-  <button
-    class="btn btn-primary"
-    on:click={() => addDeck({ name: "this is a card", color: "magenta" })}
-    >add card</button
-  >
+  <NewDeckButton />
 </ResponsiveGrid>
