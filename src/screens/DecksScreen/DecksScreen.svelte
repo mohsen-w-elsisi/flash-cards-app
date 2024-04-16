@@ -1,7 +1,7 @@
 <script lang="ts">
   import ResponsiveGrid from "@/ui/ResponsiveGrid.svelte";
   import { getDecks } from "@/storage/storageOperations";
-  import DeckCard from "./DeckCard.svelte";
+  import DeckCard from "./DeckTile.svelte";
   import NewDeckButton from "./NewDeckButton.svelte";
 
   const decks = getDecks();

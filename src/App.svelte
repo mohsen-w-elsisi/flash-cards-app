@@ -1,6 +1,6 @@
 <script lang="ts">
-  import DecksScreen from "./screens/DecksScreen.svelte";
+  import Router from "svelte-spa-router";
+  import routes from "./routes";
 </script>
 
-<DecksScreen />
-
+<Router {routes} />

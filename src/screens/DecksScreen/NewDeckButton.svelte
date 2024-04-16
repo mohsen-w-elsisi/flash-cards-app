@@ -2,10 +2,11 @@
   import { addDeck, getDeck, removeDeck } from "@/storage/storageOperations";
   import type { Deck } from "@/types";
   import DeckEditDialog from "@/ui/DeckEditDialog/DeckEditDialog.svelte";
+  import { get } from "svelte/store";
 
   function makeNewCard() {
     const newDeckID = addDeck({ name: "", color: "yellow" });
-    newDeck = getDeck(newDeckID);
+    newDeck = get(getDeck(newDeckID));
     showEditDialog();
   }
 
@@ -21,6 +22,7 @@
 
   function deleteDeckJustCreated() {
     removeDeck(newDeck.ID);
+    resetNewDeck();
   }
 
   let newDeck: Deck = {
@@ -34,11 +36,8 @@
   let showEditDialog: () => void;
 </script>
 
-<button
-  class="card border-2 border-base-content border-dashed flex flex-col justify-center"
-  on:click={makeNewCard}
->
-  <span class="text-base-content text-xl text-center w-full">add card ＋</span>
+<button class="add-new-card-button" on:click={makeNewCard}>
+  <span>add card ＋</span>
 </button>
 
 <DeckEditDialog

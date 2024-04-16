@@ -2,6 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-h1 {
-  @apply text-center;
+.add-new-card-button {
+  @apply card 
+    border-2 border-base-content border-dashed 
+    flex flex-col justify-center;
+
+  & > * {
+    @apply text-base-content text-xl text-center w-full;
+  }
+}
+
+.blue-button {
+  @apply bg-blue-500 outline-blue-500 border-blue-500 text-gray-200;
+
+  &:hover {
+    @apply bg-blue-700 outline-blue-700 border-blue-700 text-gray-200;
+  }
+}
+
+.magenta-button {
+  @apply bg-purple-500 outline-purple-500 border-purple-500 text-gray-200;
+
+  &:hover {
+    @apply bg-purple-700 outline-purple-700 border-purple-700 text-gray-200;
+  }
+}
+
+.yellow-button {
+  @apply bg-yellow-500 outline-yellow-500 border-yellow-500 text-gray-200;
+
+  &:hover {
+    @apply bg-yellow-600 outline-yellow-600 border-yellow-600 text-gray-200;
+  }
+}
+
+.red-button {
+  @apply bg-red-500 outline-red-500 border-red-500 text-gray-200;
+
+  &:hover {
+    @apply bg-red-700 outline-red-700 border-red-700 text-gray-200;
+  }
+}
+
+.green-button {
+  @apply bg-green-500 outline-green-500 border-green-500 text-gray-200;
+
+  &:hover {
+    @apply bg-green-600 outline-green-600 border-green-600 text-gray-200;
+  }
 }

@@ -9,7 +9,7 @@ export interface Deck {
 export interface Card {
   ID: string;
   frontFace: string;
-  beckFace: string;
+  backFace: string;
 }
 
 export interface Attempt {
@@ -30,6 +30,16 @@ export interface UnsavedCard {
 }
 
 export type Color = "red" | "yellow" | "green" | "magenta" | "blue";
+
+export interface ColorProps {
+  emoji: string;
+  theme: ColorTheme;
+}
+
+export interface ColorTheme {
+  background: string;
+  button: string;
+}
 
 export interface StorageProvider {
   load: () => Deck[];
