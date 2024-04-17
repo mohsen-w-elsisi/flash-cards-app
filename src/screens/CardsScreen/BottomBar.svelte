@@ -5,3 +5,5 @@
 <aside class="sm:hidden btm-nav bg-base-200 drop-shadow-lg">
   <Actions />
 </aside>
+
+<hr class="h-16">
