@@ -6,9 +6,10 @@
   import { getContext } from "svelte";
   import DeckEditDialog from "@/ui/DeckEditDialog/DeckEditDialog.svelte";
   import CardEditDialog from "./CardEditDialog.svelte";
-  import type { Card } from "@/types";
-  import { get } from "svelte/store";
+  import type { Card, ColorTheme } from "@/types";
+  import { get, type Readable } from "svelte/store";
   import { push } from "svelte-spa-router";
+  import { THEME_CONTEXT_KEY } from "@/ui/colors";
   import {
     addCard,
     getCard,
@@ -40,6 +41,8 @@
   let showCardEditDialog: () => void;
 
   let newCard: Card = { ID: "", frontFace: "", backFace: "" };
+
+  let theme: Readable<ColorTheme> = getContext(THEME_CONTEXT_KEY);
 </script>
 
 <button on:click={pusher(`attempts/${deckID}`)}><History size={30} /></button>
@@ -49,10 +52,20 @@
 
 <!-- dialogs -->
 
-<DeckEditDialog deck={$deck} bind:showEditDialog={showDeckEditDialog} />
+<DeckEditDialog
+  deck={$deck}
+  theme={$theme}
+  bind:showEditDialog={showDeckEditDialog}
+/>
 <CardEditDialog
   card={newCard}
   bind:showEditDialog={showCardEditDialog}
   onSave={resetNewCard}
   onCancel={deleteNewCard}
 />
+
+<style>
+  button {
+    @apply btn btn-ghost flex-1;
+  }
+</style>

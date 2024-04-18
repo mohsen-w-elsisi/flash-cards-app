@@ -46,7 +46,7 @@
       <form method="dialog">
         <button on:click={onCancel}>cancel</button>
         <button on:click={showDeleteDialog}>delete</button>
-        <button class="btn {theme.button}" on:click={saveDeckChanges}>
+        <button class="btn {theme?.button}" on:click={saveDeckChanges}>
           save
         </button>
       </form>
