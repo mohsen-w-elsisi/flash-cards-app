@@ -7,16 +7,17 @@
   import BottomBar from "./BottomBar.svelte";
   import Actions from "./Actions.svelte";
   import Header from "@/ui/Header.svelte";
+  import { derived } from "svelte/store";
 
   export let params: { deckID: string };
   let { deckID } = params;
 
   const deck = getDeck(deckID);
 
-  let theme = deckColorMap[$deck.color].theme;
+  const theme = derived(deck, ({ color }) => deckColorMap[color].theme);
 
-  setContext(THEME_CONTEXT_KEY, theme);
   setContext("deckID", deckID);
+  setContext(THEME_CONTEXT_KEY, theme);
 </script>
 
 <Header title={$deck.name} actionsOnlyBigScreen>

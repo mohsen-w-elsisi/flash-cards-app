@@ -6,6 +6,7 @@
   import CardEditModalInput from "./CardEditModalInput.svelte";
   import Dialog from "@/ui/Dialog.svelte";
   import DeleteDialog from "@/ui/DeleteDialog.svelte";
+  import type { Readable } from "svelte/store";
 
   export let card: Card;
   export let onSave: () => any = () => undefined;
@@ -34,7 +35,7 @@
   let newBackFace = card.backFace;
 
   let deckID: string = getContext("deckID");
-  let theme: ColorTheme = getContext(THEME_CONTEXT_KEY);
+  let theme: Readable<ColorTheme> = getContext(THEME_CONTEXT_KEY);
 </script>
 
 <Dialog bind:showDialog>
@@ -47,7 +48,7 @@
     <button on:click={onCancel}>cancel</button>
     <button on:click={showDeleteDialog}>delete</button>
     <button on:click={() => alert("not implemented")}> move </button>
-    <button class="btn {theme.button}" on:click={saveCardChanges}>
+    <button class="btn {$theme.button}" on:click={saveCardChanges}>
       save
     </button>
   </form>

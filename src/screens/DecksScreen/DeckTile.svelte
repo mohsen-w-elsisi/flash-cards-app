@@ -22,7 +22,7 @@
 
     <span class="card-actions flex flex-nowrap">
       <button
-        class="btn btn-sm flex-1 btn-outline text-gray-800"
+        class="btn btn-sm hover:border-black hover:bg-opacity-30 hover:bg-white flex-1 btn-outline text-gray-800"
         on:click={showEditDialog}
       >
         edit
@@ -32,4 +32,4 @@
   </span>
 </article>
 
-<DeckEditDIalog {deck} bind:showEditDialog />
+<DeckEditDIalog {deck} bind:theme bind:showEditDialog />

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Deck } from "@/types";
+  import type { ColorTheme, Deck } from "@/types";
   import DeckPreview from "./DeckPreview.svelte";
   import InputArea from "./InputArea.svelte";
   import { editDeck } from "@/storage/storageOperations";
@@ -7,6 +7,7 @@
   import DeleteDialog from "../DeleteDialog.svelte";
 
   export let deck: Deck;
+  export let theme: ColorTheme;
   export let onSave: () => any = () => undefined;
   export let onCancel: () => any = () => undefined;
 
@@ -45,7 +46,7 @@
       <form method="dialog">
         <button on:click={onCancel}>cancel</button>
         <button on:click={showDeleteDialog}>delete</button>
-        <button class="btn btn-primary" on:click={saveDeckChanges}>
+        <button class="btn {theme.button}" on:click={saveDeckChanges}>
           save
         </button>
       </form>
