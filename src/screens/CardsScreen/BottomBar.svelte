@@ -2,8 +2,8 @@
   import Actions from "./Actions.svelte";
 </script>
 
-<aside class="sm:hidden btm-nav bg-base-200 drop-shadow-lg">
+<aside class="btm-nav bg-base-200 drop-shadow-lg">
   <Actions />
 </aside>
 
-<hr class="h-16">
+<hr class="h-16 opacity-0">

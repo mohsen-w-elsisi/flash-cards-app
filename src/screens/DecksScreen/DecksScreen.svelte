@@ -3,13 +3,12 @@
   import { getDecks } from "@/storage/storageOperations";
   import DeckCard from "./DeckTile.svelte";
   import NewDeckButton from "./NewDeckButton.svelte";
+  import Header from "@/ui/Header.svelte";
 
   const decks = getDecks();
 </script>
 
-<header class="navbar">
-  <span class="navbar-start">mohsen's app</span>
-</header>
+<Header title="mohsen's app" noBackButton />
 
 <ResponsiveGrid>
   {#each $decks as deck}
