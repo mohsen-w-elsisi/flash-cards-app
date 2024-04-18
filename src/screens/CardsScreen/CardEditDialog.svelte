@@ -4,6 +4,8 @@
   import { THEME_CONTEXT_KEY } from "@/ui/colors";
   import { getContext } from "svelte";
   import CardEditModalInput from "./CardEditModalInput.svelte";
+  import Dialog from "@/ui/Dialog.svelte";
+  import DeleteDialog from "@/ui/DeleteDialog.svelte";
 
   export let card: Card;
   export let onSave: () => any = () => undefined;
@@ -13,7 +15,7 @@
     newFrontFace = card.frontFace;
     newBackFace = card.backFace;
 
-    dialog.showModal();
+    showDialog();
   }
 
   function saveCardChanges() {
@@ -25,7 +27,8 @@
     onSave();
   }
 
-  let dialog: HTMLDialogElement;
+  let showDialog: () => void;
+  let showDeleteDialog: () => void;
 
   let newFrontFace = card.frontFace;
   let newBackFace = card.backFace;
@@ -34,20 +37,20 @@
   let theme: ColorTheme = getContext(THEME_CONTEXT_KEY);
 </script>
 
-<dialog bind:this={dialog} class="modal modal-bottom sm:modal-middle">
-  <span class="modal-box">
-    <CardEditModalInput
-      bind:frontFace={newFrontFace}
-      bind:backFace={newBackFace}
-    />
+<Dialog bind:showDialog>
+  <CardEditModalInput
+    bind:frontFace={newFrontFace}
+    bind:backFace={newBackFace}
+  />
 
-    <span class="modal-action justify-normal">
-      <form method="dialog" class="flex gap-3 flex-1">
-        <button class="btn flex-1" on:click={onCancel}>cancel</button>
-        <button class="btn flex-1 {theme.button}" on:click={saveCardChanges}>
-          save
-        </button>
-      </form>
-    </span>
-  </span>
-</dialog>
+  <form method="dialog" slot="action">
+    <button on:click={onCancel}>cancel</button>
+    <button on:click={showDeleteDialog}>delete</button>
+    <button on:click={() => alert("not implemented")}> move </button>
+    <button class="btn {theme.button}" on:click={saveCardChanges}>
+      save
+    </button>
+  </form>
+</Dialog>
+
+<DeleteDialog type="card" {deckID} cardID={card.ID} bind:showDeleteDialog />

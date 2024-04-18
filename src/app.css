@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+.modal-action-full-width {
+  @apply modal-action justify-normal;
+  & > form {
+    @apply flex gap-3 flex-1;
+    & > button {
+      @apply flex-1;
+      &:not([class]) {
+        @apply btn;
+      }
+    }
+  }
+}
+
 .add-new-card-button {
   @apply card 
     border-2 border-base-content border-dashed 
