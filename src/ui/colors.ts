@@ -1,4 +1,4 @@
-import type { Color, ColorProps } from "@/types";
+import type { Color, ColorProps, Deck } from "@/types";
 
 export const colors: readonly Color[] = [
   "blue",
@@ -47,3 +47,7 @@ export const deckColorMap: { [k in Color]: ColorProps } = {
 } as const;
 
 export const THEME_CONTEXT_KEY = "color";
+
+export function themeOf(deck: Deck) {
+  return deckColorMap[deck.color].theme;
+}

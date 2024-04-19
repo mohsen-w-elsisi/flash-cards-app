@@ -8,7 +8,6 @@
   import CardEditDialog from "./CardEditDialog/CardEditDialog.svelte";
   import type { Card, ColorTheme } from "@/types";
   import { get, type Readable } from "svelte/store";
-  import { push } from "svelte-spa-router";
   import { THEME_CONTEXT_KEY } from "@/ui/colors";
   import {
     addCard,
@@ -16,11 +15,18 @@
     getDeck,
     removeCard,
   } from "@/storage/storageOperations";
-
-  const pusher = (url: string) => () => push(url);
+  import { review, viewAttempts } from "@/ui/navigations";
 
   const deckID: string = getContext("deckID");
   const deck = getDeck(deckID);
+
+  function reviewDeck() {
+    review(deckID);
+  }
+
+  function viewDeckAttempts() {
+    viewAttempts(deckID);
+  }
 
   function makeNewCard() {
     const newCardID = addCard(deckID, { frontFace: "", backFace: "" });
@@ -45,10 +51,10 @@
   let theme: Readable<ColorTheme> = getContext(THEME_CONTEXT_KEY);
 </script>
 
-<button on:click={pusher(`attempts/${deckID}`)}><History size={30} /></button>
+<button on:click={viewDeckAttempts}><History size={30} /></button>
 <button on:click={showDeckEditDialog}><Edit size={30} /></button>
 <button on:click={makeNewCard}><Add size={30} /></button>
-<button on:click={pusher(`review/${deckID}`)}><Check size={30} /></button>
+<button on:click={reviewDeck}><Check size={30} /></button>
 
 <!-- dialogs -->
 

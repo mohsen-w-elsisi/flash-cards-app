@@ -1,13 +1,18 @@
 <script lang="ts">
   import DeckEditDIalog from "@/ui/DeckEditDialog/DeckEditDialog.svelte";
   import type { ColorTheme, Deck } from "@/types";
-  import { deckColorMap } from "@/ui/colors";
+  import { themeOf } from "@/ui/colors";
   import { link } from "svelte-spa-router";
+  import { review } from "@/ui/navigations";
 
   export let deck: Deck;
 
+  function reviewDeck() {
+    review(deck.ID);
+  }
+
   let theme: ColorTheme;
-  $: theme = deckColorMap[deck.color].theme;
+  $: theme = themeOf(deck);
 
   let showEditDialog: () => void;
 </script>
@@ -27,7 +32,9 @@
       >
         edit
       </button>
-      <button class="btn btn-sm flex-1 {theme.button}">review</button>
+      <button class="btn btn-sm flex-1 {theme.button}" on:click={reviewDeck}>
+        review
+      </button>
     </span>
   </span>
 </article>

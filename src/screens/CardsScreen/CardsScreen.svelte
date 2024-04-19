@@ -1,7 +1,7 @@
 <script lang="ts">
   import { getDeck } from "@/storage/storageOperations";
   import ResponsiveGrid from "@/ui/ResponsiveGrid.svelte";
-  import { THEME_CONTEXT_KEY, deckColorMap } from "@/ui/colors";
+  import { THEME_CONTEXT_KEY, deckColorMap, themeOf } from "@/ui/colors";
   import { setContext } from "svelte";
   import CardTile from "./CardTile.svelte";
   import BottomBar from "./BottomBar.svelte";
@@ -14,7 +14,7 @@
 
   const deck = getDeck(deckID);
 
-  const theme = derived(deck, ({ color }) => deckColorMap[color].theme);
+  const theme = derived(deck, themeOf);
 
   setContext("deckID", deckID);
   setContext(THEME_CONTEXT_KEY, theme);
