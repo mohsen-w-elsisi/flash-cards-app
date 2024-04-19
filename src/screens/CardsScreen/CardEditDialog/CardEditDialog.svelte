@@ -3,7 +3,7 @@
   import type { Card, ColorTheme } from "@/types";
   import { THEME_CONTEXT_KEY } from "@/ui/colors";
   import { getContext } from "svelte";
-  import CardEditModalInput from "./CardEditModalInput.svelte";
+  import Inputs from "./Inputs.svelte";
   import Dialog from "@/ui/Dialog.svelte";
   import DeleteDialog from "@/ui/DeleteDialog.svelte";
   import type { Readable } from "svelte/store";
@@ -39,10 +39,7 @@
 </script>
 
 <Dialog bind:showDialog>
-  <CardEditModalInput
-    bind:frontFace={newFrontFace}
-    bind:backFace={newBackFace}
-  />
+  <Inputs bind:frontFace={newFrontFace} bind:backFace={newBackFace} />
 
   <form method="dialog" slot="action">
     <button on:click={onCancel}>cancel</button>

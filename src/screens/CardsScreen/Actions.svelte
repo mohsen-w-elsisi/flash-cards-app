@@ -5,7 +5,7 @@
   import Check from "svelte-material-icons/CheckOutline.svelte";
   import { getContext } from "svelte";
   import DeckEditDialog from "@/ui/DeckEditDialog/DeckEditDialog.svelte";
-  import CardEditDialog from "./CardEditDialog.svelte";
+  import CardEditDialog from "./CardEditDialog/CardEditDialog.svelte";
   import type { Card, ColorTheme } from "@/types";
   import { get, type Readable } from "svelte/store";
   import { push } from "svelte-spa-router";

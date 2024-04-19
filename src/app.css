@@ -15,16 +15,6 @@
   }
 }
 
-.add-new-card-button {
-  @apply card 
-    border-2 border-base-content border-dashed 
-    flex flex-col justify-center;
-
-  & > * {
-    @apply text-base-content text-xl text-center w-full;
-  }
-}
-
 .blue-button {
   @apply bg-blue-500 outline-blue-500 border-blue-500 text-gray-200;
 

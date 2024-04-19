@@ -2,6 +2,7 @@
   import { addDeck, getDeck, removeDeck } from "@/storage/storageOperations";
   import type { Deck } from "@/types";
   import DeckEditDialog from "@/ui/DeckEditDialog/DeckEditDialog.svelte";
+  import { deckColorMap } from "@/ui/colors";
   import { get } from "svelte/store";
 
   function makeNewCard() {
@@ -36,13 +37,26 @@
   let showEditDialog: () => void;
 </script>
 
-<button class="add-new-card-button" on:click={makeNewCard}>
+<button on:click={makeNewCard}>
   <span>add card ＋</span>
 </button>
 
 <DeckEditDialog
   bind:deck={newDeck}
   bind:showEditDialog
+  theme={deckColorMap[newDeck.color].theme}
   onSave={resetNewDeck}
   onCancel={deleteDeckJustCreated}
 />
+
+<style>
+  button {
+    @apply card
+      border-2 border-base-content border-dashed
+      flex flex-col justify-center;
+
+    & > * {
+      @apply text-base-content text-xl text-center w-full;
+    }
+  }
+</style>

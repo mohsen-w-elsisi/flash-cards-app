@@ -2,7 +2,7 @@
   import type { Card, ColorTheme } from "@/types";
   import { THEME_CONTEXT_KEY } from "@/ui/colors";
   import { getContext } from "svelte";
-  import CardEditDialog from "./CardEditDialog.svelte";
+  import CardEditDialog from "./CardEditDialog/CardEditDialog.svelte";
   import type { Readable } from "svelte/store";
 
   export let card: Card;

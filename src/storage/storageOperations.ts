@@ -1,4 +1,4 @@
-import { derived, get, readonly, writable } from "svelte/store";
+import { derived, readonly, writable } from "svelte/store";
 import storageProvider from "./storageProviders";
 import type { Card, Deck, UnsavedCard, UnsavedDeck } from "@/types";
 
@@ -11,9 +11,17 @@ function makeID() {
 }
 
 function overwriteDeckInDecks(deckID: string, editor: (deck: Deck) => Deck) {
-  decks.update((oldDecks) =>
-    oldDecks.map((deck) => (deck.ID == deckID ? editor(deck) : deck))
+  decks.update(($decks) =>
+    $decks.map((deck) => (deck.ID == deckID ? editor(deck) : deck))
   );
+}
+
+function findByID<T extends Card | Deck>(list: T[], ID: string): T {
+  return list.reduce((prev, cur) => (cur.ID == ID ? cur : prev));
+}
+
+function removeByID<T extends Card | Deck>(list: T[], ID: string): T[] {
+  return list.filter((item) => item.ID != ID);
 }
 
 export function getDecks() {
@@ -21,28 +29,26 @@ export function getDecks() {
 }
 
 export function getDeck(deckID: string) {
-  return derived(decks, (_decks) =>
-    _decks.reduce((prev, cur) => (cur.ID == deckID ? cur : prev))
-  );
+  return derived(decks, ($decks) => findByID($decks, deckID));
 }
 
 export function addDeck(unsavedDeck: UnsavedDeck) {
-  const newCardID = makeID();
+  const newDeckID = makeID();
 
   const newDeck: Deck = {
     ...unsavedDeck,
-    ID: newCardID,
+    ID: newDeckID,
     cards: [],
     attempts: [],
   };
 
-  decks.update((oldDecks) => [...oldDecks, newDeck]);
+  decks.update(($decks) => [...$decks, newDeck]);
 
-  return newCardID;
+  return newDeckID;
 }
 
 export function removeDeck(deckID: string) {
-  decks.update(($decks) => $decks.filter((deck) => deck.ID != deckID));
+  decks.update(($decks) => removeByID($decks, deckID));
 }
 
 export function editDeck(deckID: string, newDeck: UnsavedDeck) {
@@ -50,17 +56,11 @@ export function editDeck(deckID: string, newDeck: UnsavedDeck) {
 }
 
 export function getCard(deckID: string, cardID: string) {
-  return derived(decks, (_decks) =>
-    _decks.reduce<Card>(
-      (prevDeck, curDeck) =>
-        curDeck.ID == deckID
-          ? curDeck.cards.reduce((prevCard, curCard) =>
-              curCard.ID == cardID ? curCard : prevCard
-            )
-          : prevDeck,
-      { ID: "", frontFace: "", backFace: "" }
-    )
-  );
+  return derived(decks, ($decks) => {
+    const deck = findByID($decks, deckID);
+    const card = findByID(deck.cards, cardID);
+    return card;
+  });
 }
 
 export function addCard(deckID: string, unsavedCard: UnsavedCard) {
@@ -79,14 +79,10 @@ export function addCard(deckID: string, unsavedCard: UnsavedCard) {
   return newCardID;
 }
 
-export function editCard(
-  deckID: string,
-  cardID: string,
-  unsavedCard: UnsavedCard
-) {
+export function editCard(deckID: string, cardID: string, newCard: UnsavedCard) {
   const adjustedCard: Card = {
     ID: cardID,
-    ...unsavedCard,
+    ...newCard,
   };
 
   overwriteDeckInDecks(deckID, (deck) => ({
@@ -98,6 +94,6 @@ export function editCard(
 export function removeCard(deckID: string, cardID: string) {
   overwriteDeckInDecks(deckID, (deck) => ({
     ...deck,
-    cards: deck.cards.filter((card) => card.ID != cardID),
+    cards: removeByID(deck.cards, cardID),
   }));
 }
