@@ -6,7 +6,7 @@
   import ResponseChoices from "./ResponseChoices.svelte";
   import { viewAttempts } from "@/ui/navigations";
   import createTimer from "./timer";
-  
+
   export let params: { deckID: string };
 
   const { startTimer, stopTimer } = createTimer();
@@ -32,7 +32,7 @@
 
   function onWrong() {
     cards.push(activeCard);
-    mistakes.push(activeCard.ID);
+    if (!mistakes.includes(activeCard.ID)) mistakes.push(activeCard.ID);
     switchToNextCard();
   }
 

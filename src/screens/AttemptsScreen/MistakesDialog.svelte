@@ -18,12 +18,12 @@
 <Dialog bind:showDialog={showMistakesDialog}>
   {#each mistakenCards as card}
     <article class="card card-compact bg-base-200 w-full my-2">
-      <span class="card-body">
+      <span class="card-body text-xl">
         {#if card.ID}
           <b>{card.frontFace}:</b>
           <span>{card.backFace}</span>
         {:else}
-          <span class="opacity-50">card has been delete</span>
+          <span class="opacity-50">this card has been delete</span>
         {/if}
       </span>
     </article>
