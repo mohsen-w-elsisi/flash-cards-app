@@ -26,12 +26,22 @@
 </script>
 
 <button
-  class="card card-compact {theme.background} h-full"
+  class="card card-compact {theme.background} h-full {!cardFlipped ||
+    'flip'} duration-500"
   on:click={toggleFlipping}
 >
-  <span class="card-body justify-center">
-    <h2 class="text-xl text-center">
+  <span class="card-body justify-center w-full h-full">
+    <h2 class="text-3xl text-center">
       {cardFlipped ? activeCard.backFace : activeCard.frontFace}
     </h2>
   </span>
 </button>
+
+<style>
+  .flip {
+    transform: rotateY(180deg);
+    & span {
+      transform: rotateY(-180deg);
+    }
+  }
+</style>
