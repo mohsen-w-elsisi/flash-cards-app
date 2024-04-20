@@ -2,12 +2,15 @@
   import { getDeck } from "@/storage/storageOperations";
   import Header from "@/ui/Header.svelte";
   import AttemptTile from "./AttemptTile.svelte";
+  import { setContext } from "svelte";
 
   export let params: { deckID: string };
 
   const { deckID } = params;
 
   const deck = getDeck(deckID);
+
+  setContext("deckID", deckID);
 </script>
 
 <Header title={$deck.name} />

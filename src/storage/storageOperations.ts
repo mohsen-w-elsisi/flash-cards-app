@@ -17,7 +17,7 @@ function overwriteDeckInDecks(deckID: string, editor: (deck: Deck) => Deck) {
 }
 
 function findByID<T extends Card | Deck>(list: T[], ID: string): T {
-  return list.reduce((prev, cur) => (cur.ID == ID ? cur : prev));
+  return list.reduce((prev, cur) => (cur.ID == ID ? cur : prev), {ID: ""} as T);
 }
 
 function removeByID<T extends Card | Deck>(list: T[], ID: string): T[] {

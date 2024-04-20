@@ -19,4 +19,8 @@
       </sapn>
     {/if}
   </span>
+
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
 </dialog>
