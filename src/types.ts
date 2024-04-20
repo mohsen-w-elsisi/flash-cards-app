@@ -13,9 +13,9 @@ export interface Card {
 }
 
 export interface Attempt {
-  date: string;
-  NumberOfCards: number;
-  correct: number;
+  date: number; //UCT
+  duration: number;
+  numberOfCards: number;
   mistakes: string[];
 }
 

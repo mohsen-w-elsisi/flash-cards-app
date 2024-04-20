@@ -1,6 +1,6 @@
 import { derived, readonly, writable } from "svelte/store";
 import storageProvider from "./storageProviders";
-import type { Card, Deck, UnsavedCard, UnsavedDeck } from "@/types";
+import type { Attempt, Card, Deck, UnsavedCard, UnsavedDeck } from "@/types";
 
 const decks = writable(storageProvider.load());
 
@@ -95,5 +95,12 @@ export function removeCard(deckID: string, cardID: string) {
   overwriteDeckInDecks(deckID, (deck) => ({
     ...deck,
     cards: removeByID(deck.cards, cardID),
+  }));
+}
+
+export function addAttempt(deckID: string, attempt: Attempt) {
+  overwriteDeckInDecks(deckID, (deck) => ({
+    ...deck,
+    attempts: [...deck.attempts, attempt],
   }));
 }
