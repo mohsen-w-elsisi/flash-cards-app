@@ -28,6 +28,9 @@
 
   let newName = deck.name;
   let newColor = deck.color;
+
+  let disableSubmission = false;
+  $: disableSubmission = newName == "";
 </script>
 
 <Dialog
@@ -46,7 +49,11 @@
       <form method="dialog">
         <button on:click={onCancel}>cancel</button>
         <button on:click={showDeleteDialog}>delete</button>
-        <button class="btn {theme?.button}" on:click={saveDeckChanges}>
+        <button
+          class="btn {theme?.button}"
+          on:click={saveDeckChanges}
+          disabled={disableSubmission}
+        >
           save
         </button>
       </form>

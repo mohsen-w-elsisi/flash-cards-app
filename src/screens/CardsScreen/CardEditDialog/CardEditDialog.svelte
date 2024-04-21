@@ -36,6 +36,9 @@
 
   let deckID: string = getContext("deckID");
   let theme: Readable<ColorTheme> = getContext(THEME_CONTEXT_KEY);
+
+  let disableSubmission = false;
+  $: disableSubmission = newFrontFace == "" || newBackFace == "";
 </script>
 
 <Dialog bind:showDialog>
@@ -45,7 +48,11 @@
     <button on:click={onCancel}>cancel</button>
     <button on:click={showDeleteDialog}>delete</button>
     <button on:click={() => alert("not implemented")}> move </button>
-    <button class="btn {$theme.button}" on:click={saveCardChanges}>
+    <button
+      class="btn {$theme.button}"
+      on:click={saveCardChanges}
+      disabled={disableSubmission}
+    >
       save
     </button>
   </form>
