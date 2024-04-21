@@ -32,7 +32,7 @@
       >
         edit
       </button>
-      <button class="btn btn-sm flex-1 {theme.button}" on:click={reviewDeck}>
+      <button class="btn btn-sm flex-1 {theme.button}" disabled={deck.cards.length == 0} on:click={reviewDeck}>
         review
       </button>
     </span>

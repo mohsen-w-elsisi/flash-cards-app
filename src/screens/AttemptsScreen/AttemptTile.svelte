@@ -8,6 +8,7 @@
   const { date, duration, numberOfCards, mistakes } = attempt;
 
   const correct = numberOfCards - mistakes.length;
+  const correctPercentage = Math.round(correct*100/numberOfCards)
 
   const dateText = moment(date).format("D-M-YY");
 
@@ -39,8 +40,9 @@
     </div>
 
     <div class="col-span-2">
+      <span class="stat-title">{correctPercentage}%</span>
       <progress
-        class="progress progress-success bg-red-600"
+        class="progress progress-success bg-red-600 stat-value"
         value={correct}
         max={numberOfCards}
       />

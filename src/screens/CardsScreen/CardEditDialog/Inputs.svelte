@@ -11,11 +11,11 @@
 </script>
 
 <div
-  class="card aspect-[2/3] mx-auto w-full max-w-80 sm:h-56 sm:w-auto {$theme.background}"
+  class="card aspect-[2/3] sm:aspect-[3/2] w-full max-w-80 sm:max-w-none mx-auto {$theme.background}"
 >
-  <span class="card-body">
+  <span class="card-body sm:flex-row">
     <textarea bind:value={frontFace} />
-    <hr class="divider my-8 divider-neutral" />
+    <hr class="divider my-8 divider-neutral sm:divider-horizontal" />
     <textarea bind:value={backFace} />
   </span>
 </div>

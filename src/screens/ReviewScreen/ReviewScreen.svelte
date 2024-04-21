@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Screen from "@/ui/Screen.svelte";
   import { addAttempt, getDeck } from "@/storage/storageOperations";
   import Header from "@/ui/Header.svelte";
   import { themeOf } from "@/ui/colors";
@@ -6,6 +7,7 @@
   import ResponseChoices from "./ResponseChoices.svelte";
   import { viewAttempts } from "@/ui/navigations";
   import createTimer from "./timer";
+  import { fly } from "svelte/transition";
 
   export let params: { deckID: string };
 
@@ -50,14 +52,16 @@
   startTimer();
 </script>
 
-<span class="flex flex-col h-screen">
-  <Header title={$deck.name} />
-  <main class="h-full w-screen max-w-[500px] p-6 mx-auto flex flex-col gap-6">
-    <ActiveCardView {theme} {activeCard} bind:cardFlipped />
-    <ResponseChoices
-      hide={!cardFlipped}
-      onCorrect={switchToNextCard}
-      {onWrong}
-    />
-  </main>
-</span>
+<Screen>
+  <span class="flex flex-col h-screen">
+    <Header title={$deck.name} />
+    <main class="h-full w-screen max-w-[500px] p-6 mx-auto flex flex-col gap-6">
+      <ActiveCardView {theme} {activeCard} bind:cardFlipped />
+      <ResponseChoices
+        hide={!cardFlipped}
+        onCorrect={switchToNextCard}
+        {onWrong}
+      />
+    </main>
+  </span>
+</Screen>

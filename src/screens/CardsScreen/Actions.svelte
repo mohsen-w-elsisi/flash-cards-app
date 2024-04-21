@@ -54,7 +54,9 @@
 <button on:click={viewDeckAttempts}><History size={30} /></button>
 <button on:click={showDeckEditDialog}><Edit size={30} /></button>
 <button on:click={makeNewCard}><Add size={30} /></button>
-<button on:click={reviewDeck}><Check size={30} /></button>
+<button on:click={reviewDeck} disabled={$deck.cards.length == 0}>
+  <Check size={30} />
+</button>
 
 <!-- dialogs -->
 
