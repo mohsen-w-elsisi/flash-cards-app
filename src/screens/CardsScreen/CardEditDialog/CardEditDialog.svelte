@@ -47,7 +47,6 @@
   <form method="dialog" slot="action">
     <button on:click={onCancel}>cancel</button>
     <button on:click={showDeleteDialog}>delete</button>
-    <button on:click={() => alert("not implemented")}> move </button>
     <button
       class="btn {$theme.button}"
       on:click={saveCardChanges}
